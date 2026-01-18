@@ -13,6 +13,9 @@ services:
       - ./sites:/etc/nginx/conf.d:ro
       # RMS Application
       - ../../apps/rms-ci4/public:/var/www/rms/public:ro
+      # SSL Certificates
+      - ./ssl:/etc/nginx/ssl:ro
+
     # depends_on:
     #   - php-rms
     mem_limit: 64m
