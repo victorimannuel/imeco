@@ -1,0 +1,16 @@
+1. docker network create appnet
+2. build docker for:
+    - apps
+        - rms-ci4
+    - services
+        - mysql
+        - phpmyadmin
+        - nginx
+
+3. install vendor
+- docker exec -it php-ci4-rms bash
+- composer install
+
+4. set permission
+- docker exec -it php-ci4-rms bash
+- chown -R www-data:www-data writeable/cache
