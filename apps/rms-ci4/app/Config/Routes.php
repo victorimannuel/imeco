@@ -10,12 +10,12 @@ use CodeIgniter\Router\RouteCollection;
 $hosts = [
     'radar-ms.local',
     'radar-ms.com',
-    'rms.imannuelvictor.com',
+    'radar-ms.imannuelvictor.com',
 ];
 $adminHosts = [
     'admin.radar-ms.local',
     'admin.radar-ms.com',
-    'admin.rms.imannuelvictor.com',
+    'admin.radar-ms.imannuelvictor.com',
 ];
 $currentHost = '';
 $currentAdminHost = '';
