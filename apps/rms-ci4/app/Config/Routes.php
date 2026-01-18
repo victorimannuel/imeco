@@ -56,40 +56,40 @@ foreach ($hosts as $host) {
 foreach ($adminHosts as $adminHost) {
     $routes->group('', ['hostname' => $adminHost], function($routes) {
 
-    // Auth admin
-    $routes->get('login', 'Admin\Auth::index');
-    $routes->post('login', 'Admin\Auth::login');
-    $routes->get('logout', 'Admin\Auth::logout');
+        // Auth admin
+        $routes->get('login', 'Admin\Auth::index');
+        $routes->post('login', 'Admin\Auth::login');
+        $routes->get('logout', 'Admin\Auth::logout');
 
-    // Redirect /admin di subdomain admin juga ke domain utama
-    $routes->get('admin', function() {
-        return redirect()->to(site_url()); // redirect ke root domain utama
-    });
-
-    // Protected routes (harus login)
-    $routes->group('', ['filter' => 'auth', 'namespace' => 'App\Controllers\Admin'], function($routes) {
-        // Dashboard/Home -> Redirect to product view
-        $routes->get('/', 'ProductController::index');
-        
-        // Product routes
-        $routes->group('product', function($routes) {
-            $routes->get('/', 'ProductController::index'); 
-            $routes->get('new', 'ProductController::new'); 
-            $routes->post('save', 'ProductController::save');
-            $routes->get('edit/(:num)', 'ProductController::edit/$1');
-            $routes->post('update/(:num)', 'ProductController::update/$1');
-            $routes->get('delete/(:num)', 'ProductController::delete/$1');
-            $routes->get('search', 'ProductController::search');
-            $routes->post('reorder', 'ProductController::reorder');
+        // Redirect /admin di subdomain admin juga ke domain utama
+        $routes->get('admin', function() {
+            return redirect()->to(site_url()); // redirect ke root domain utama
         });
-        
-        // Documentation (image/video) routes
-        $routes->group('documentation', function($routes) {
-            $routes->get('/', 'DocumentationController::index');        // List documents
-            $routes->post('upload', 'DocumentationController::upload'); // Handle upload
-            $routes->post('reorder', 'DocumentationController::reorder'); // Drag & drop order
-            $routes->post('delete/(:num)', 'DocumentationController::delete/$1'); // Delete document
+
+        // Protected routes (harus login)
+        $routes->group('', ['filter' => 'auth', 'namespace' => 'App\Controllers\Admin'], function($routes) {
+            // Dashboard/Home -> Redirect to product view
+            $routes->get('/', 'ProductController::index');
+            
+            // Product routes
+            $routes->group('product', function($routes) {
+                $routes->get('/', 'ProductController::index'); 
+                $routes->get('new', 'ProductController::new'); 
+                $routes->post('save', 'ProductController::save');
+                $routes->get('edit/(:num)', 'ProductController::edit/$1');
+                $routes->post('update/(:num)', 'ProductController::update/$1');
+                $routes->get('delete/(:num)', 'ProductController::delete/$1');
+                $routes->get('search', 'ProductController::search');
+                $routes->post('reorder', 'ProductController::reorder');
+            });
+            
+            // Documentation (image/video) routes
+            $routes->group('documentation', function($routes) {
+                $routes->get('/', 'DocumentationController::index');        // List documents
+                $routes->post('upload', 'DocumentationController::upload'); // Handle upload
+                $routes->post('reorder', 'DocumentationController::reorder'); // Drag & drop order
+                $routes->post('delete/(:num)', 'DocumentationController::delete/$1'); // Delete document
+            });
         });
     });
-});
-
+}
