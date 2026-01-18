@@ -1,0 +1,33 @@
+<aside class="bg-[var(--color-bg-sidebar)] text-[var(--color-text)] w-70 min-h-screen p-6 hidden md:block flex-shrink-0">
+    
+    <a href="<?= base_url('/') ?>" class="flex items-center space-x-3 mb-10 hover:text-[var(--color-primary-hover)] transition-colors">
+        <img src="/logo.png" alt="Admin Panel Logo" class="h-10 w-10 object-contain rounded-md shadow-md">
+        <span class="text-3xl font-extrabold tracking-tight">Admin Panel</span>
+    </a>
+
+    <nav class="space-y-2">
+        <?php 
+            // Variabel $page_title harus dilewatkan dari controller
+            $active_page = $page_title ?? 'Dashboard'; // Default ke Dashboard jika tidak ada
+        ?>
+
+        <a href="<?= base_url('/products') ?>" 
+            class="flex items-center space-x-2 py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white
+                  <?= ($active_page == 'Manajemen Produk') ? 'bg-gray-700 text-white font-semibold' : '' ?>">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 7.5-9-5.25L3 7.5m18 0-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9" />
+            </svg>
+            <span>Produk</span>
+        </a>
+
+        <a href="<?= base_url('/documentation') ?>" 
+           class="flex items-center space-x-2 py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white
+                  <?= ($active_page == 'Dokumentasi') ? 'bg-gray-700 text-white font-semibold' : '' ?>">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+            </svg>
+            <span>Dokumentasi</span>
+        </a>
+
+    </nav>
+</aside>

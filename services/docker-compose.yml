@@ -1,0 +1,4 @@
+include:
+  - nginx/docker-compose.yml
+  - mysql/docker-compose.yml
+  - phpmyadmin/docker-compose.yml

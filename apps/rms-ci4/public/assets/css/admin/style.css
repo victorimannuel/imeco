@@ -1,0 +1,13 @@
+.sidebar-link {
+    @apply flex items-center space-x-3 py-3 px-4 rounded-lg transition-all duration-200;
+    color: var(--color-text);
+}
+.sidebar-link:hover {
+    background-color: var(--color-bg-sidebar-hover);
+    color: var(--color-primary);
+}
+.sidebar-link.active {
+    background-color: var(--color-active-bg);
+    color: var(--color-active-text);
+    font-weight: 600;
+}

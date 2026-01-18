@@ -1,0 +1,6 @@
+1. docker network create appnet
+2. build docker for:
+    - rms-ci4
+    - mysql
+    - phpmyadmin
+    - nginx
