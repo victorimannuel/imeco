@@ -134,3 +134,10 @@ _modules/*
 
 #-------------------------
 data/
+
+
+# Ignore all files in uploads
+services/nginx/.ssl/*
+
+# Tapi keep folder agar tetap ada di repo
+!/services/nginx/.ssl/.gitkeep
