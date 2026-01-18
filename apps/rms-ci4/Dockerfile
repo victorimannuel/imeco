@@ -12,3 +12,5 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install mysqli pdo pdo_mysql intl zip \
     && docker-php-ext-enable mysqli pdo_mysql intl zip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+COPY --from=composer:2 /usr/bin/composer /usr/local/bin/composer
