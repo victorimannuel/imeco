@@ -14,3 +14,5 @@
 4. set permission
 - docker exec -it php-ci4-rms bash
 - chown -R www-data:www-data writeable/cache
+- chown -R www-data:www-data writeable/session
+- chown -R www-data:www-data writeable/logs
