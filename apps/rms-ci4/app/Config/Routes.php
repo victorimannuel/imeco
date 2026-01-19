@@ -15,7 +15,7 @@ $hosts = [
 $adminHosts = [
     'admin.radar-ms.local',
     'admin.radar-ms.com',
-    'admin.radar-ms.imannuelvictor.com',
+    'admin-radar-ms.imannuelvictor.com',
 ];
 $currentHost = '';
 $currentAdminHost = '';
