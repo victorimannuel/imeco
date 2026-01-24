@@ -1,0 +1,3 @@
+[submodule "apps/anugrah-travel-api"]
+	path = apps/anugrah-travel-api
+	url = https://github.com/victorimannuel/anugrah-travel-api.git
