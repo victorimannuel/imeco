@@ -30,8 +30,8 @@ services:
       - CRON_SCHEDULE=0 * * * *
       - COMMAND=rclone copy /backup GOOGLEDRIVE_OPS:Backup/RMS
       - RCLONE_CONFIG_GOOGLEDRIVE_OPS_TYPE=${type}
-      - RCLONE_CONFIG_GOOGLEDRIVE_OPS_CLIENT_ID=${client}
-      - RCLONE_CONFIG_GOOGLEDRIVE_OPS_CLIENT_SECRET=${secret}
+      - RCLONE_CONFIG_GOOGLEDRIVE_OPS_CLIENT_ID=${client_id}
+      - RCLONE_CONFIG_GOOGLEDRIVE_OPS_CLIENT_SECRET=${client_secret}
       - RCLONE_CONFIG_GOOGLEDRIVE_OPS_TOKEN=${token}
     networks:
       - appnet
