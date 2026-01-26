@@ -14,6 +14,7 @@ services:
       - MYSQL_HOST=mysql
       - MYSQL_USER=root
       - MYSQL_PASS=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DB=${MYSQL_DATABASE}
       - MAX_BACKUPS=1
       - INIT_BACKUP=1
       - CRON_TIME=0 0 * * *
