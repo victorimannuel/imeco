@@ -30,7 +30,7 @@ services:
       - ../../apps/radar-mandiri-sukses/public/uploads:/uploads:ro
     environment:
       - CRON_SCHEDULE=0 * * * *
-      - COMMAND=rclone copy /backup GOOGLEDRIVE_OPS:Backup/RMS && tar -czf /uploads_$(date +'%Y-%m-%d-%H%M').tar.gz /uploads && rclone copy /uploads_$(date +'%Y-%m-%d-%H%M').tar.gz GOOGLEDRIVE_OPS:Backup/RMS/Uploads
+      - COMMAND=rclone copy /backup GOOGLEDRIVE_OPS:Backup/RMS/Database && tar -czf /uploads_$(date +'%Y-%m-%d-%H%M').tar.gz /uploads && rclone copy /uploads_$(date +'%Y-%m-%d-%H%M').tar.gz GOOGLEDRIVE_OPS:Backup/RMS/Attachment && rm /uploads_*.tar.gz
       - RCLONE_CONFIG_GOOGLEDRIVE_OPS_TYPE=${type}
       - RCLONE_CONFIG_GOOGLEDRIVE_OPS_CLIENT_ID=${client_id}
       - RCLONE_CONFIG_GOOGLEDRIVE_OPS_CLIENT_SECRET=${client_secret}
