@@ -4,6 +4,7 @@ networks:
 
 services:
   mysql-cron-backup:
+    container_name: mysql-cron-backup
     image: fradelg/mysql-cron-backup
     # depends_on:
     #   - mysql
@@ -21,6 +22,7 @@ services:
       - appnet
   
   rclone-cron:
+    container_name: rclone-cron
     image: olivierdalang/rclone-cron:latest
     volumes:
       - ../../data/backup/:/backup
