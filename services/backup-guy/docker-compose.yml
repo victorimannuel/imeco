@@ -14,10 +14,10 @@ services:
       - ./rclone_config:/root/.config/rclone  # rclone.conf Google Drive
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-      - BACKUP_DATE=$(date +%Y%m%d_%H%M%S)
     entrypoint: /bin/sh
     command: >
       -c "
+      BACKUP_DATE=$(date +%Y%m%d_%H%M%S) &&
       apk add --no-cache mysql-client tar gzip bash curl &&
       curl https://rclone.org/install.sh | bash &&
       echo 'Starting MySQL backup...' &&
