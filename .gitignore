@@ -141,3 +141,7 @@ services/nginx/ssl/*
 
 # Tapi keep folder agar tetap ada di repo
 !/services/nginx/ssl/.gitkeep
+
+# rclone-related
+*rclone.conf
+*googleusercontent.com.json
