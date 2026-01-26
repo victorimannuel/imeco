@@ -3,34 +3,33 @@ networks:
     external: true
 
 services:
-  backup:
-    image: alpine:3.18
-    container_name: backup_guy
-    restart: "no"
+  mysql-cron-backup:
+    image: fradelg/mysql-cron-backup
+    # depends_on:
+    #   - mysql
     volumes:
-      - mysql_data:/var/lib/mysql:ro       # MySQL volume read-only
-      - uploads_data:/data:ro              # Uploads/media volume read-only
-      - ./backup:/backup                   # Temp backup hasilnya
-      - ./rclone_config:/root/.config/rclone  # rclone.conf Google Drive
+      - ../../data/backup:/backup
     environment:
-      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
-    entrypoint: /bin/sh
-    command: >
-      -c "
-      BACKUP_DATE=$(date +%Y%m%d_%H%M%S) &&
-      apk add --no-cache mysql-client tar gzip bash curl &&
-      curl https://rclone.org/install.sh | bash &&
-      echo 'Starting MySQL backup...' &&
-      mysqldump -uroot -p$MYSQL_ROOT_PASSWORD --all-databases > /backup/db_backup_$BACKUP_DATE.sql &&
-      tar czf /backup/uploads_backup_$BACKUP_DATE.tar.gz -C /data . &&
-      rclone copy /backup gdrive:Backup/RMS --config /.config/rclone/.rclone.conf --progress &&
-      echo 'Backup completed.'
-      "
+      - MYSQL_HOST=mysql
+      - MYSQL_USER=root
+      - MYSQL_PASS=${MYSQL_ROOT_PASSWORD}
+      - MAX_BACKUPS=1
+      - INIT_BACKUP=1
+      - CRON_TIME=0 0 * * *
+    restart: unless-stopped
     networks:
       - appnet
-
-volumes:
-  mysql_data:
-    external: true
-  uploads_data:
-    external: true
+  
+  rclone-cron:
+    image: olivierdalang/rclone-cron:latest
+    volumes:
+      - ../../data/backup/:/backup
+    environment:
+      - CRON_SCHEDULE=0 * * * *
+      - COMMAND=rclone copy /backup GOOGLEDRIVE_OPS:Backup/RMS
+      - RCLONE_CONFIG_GOOGLEDRIVE_OPS_TYPE=${type}
+      - RCLONE_CONFIG_GOOGLEDRIVE_OPS_CLIENT_ID=${client}
+      - RCLONE_CONFIG_GOOGLEDRIVE_OPS_CLIENT_SECRET=${secret}
+      - RCLONE_CONFIG_GOOGLEDRIVE_OPS_TOKEN=${token}
+    networks:
+      - appnet
