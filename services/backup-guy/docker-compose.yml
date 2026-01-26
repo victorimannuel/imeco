@@ -15,7 +15,7 @@ services:
       - MYSQL_USER=root
       - MYSQL_PASS=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DB=${MYSQL_DATABASE}
-      - MAX_BACKUPS=1
+      - MAX_BACKUPS=9
       - INIT_BACKUP=1
       - CRON_TIME=0 0 * * *
     restart: unless-stopped
@@ -27,9 +27,10 @@ services:
     image: olivierdalang/rclone-cron:latest
     volumes:
       - ../../data/backup/:/backup
+      - ../../apps/radar-mandiri-sukses/public/uploads:/uploads:ro
     environment:
       - CRON_SCHEDULE=0 * * * *
-      - COMMAND=rclone copy /backup GOOGLEDRIVE_OPS:Backup/RMS
+      - COMMAND=rclone copy /backup GOOGLEDRIVE_OPS:Backup/RMS && tar -czf /uploads_$(date +'%Y-%m-%d-%H%M').tar.gz /uploads && rclone copy /uploads_$(date +'%Y-%m-%d-%H%M').tar.gz GOOGLEDRIVE_OPS:Backup/RMS/Uploads
       - RCLONE_CONFIG_GOOGLEDRIVE_OPS_TYPE=${type}
       - RCLONE_CONFIG_GOOGLEDRIVE_OPS_CLIENT_ID=${client_id}
       - RCLONE_CONFIG_GOOGLEDRIVE_OPS_CLIENT_SECRET=${client_secret}
